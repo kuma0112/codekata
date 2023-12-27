@@ -1,52 +1,29 @@
 public class codekata41 {
     public String solution(String s) {
         String answer = "";
-        String[] words = s.split(" ");
-        for (int index = 0; index < words.length; index++){
-            char[] array = words[index].toCharArray();
-            for(int i = 0; i < array.length; i++){
-                if ((i % 2 == 0 && Character.isLowerCase(array[i])) || (i == 0 && Character.isLowerCase(array[i]))) {
-                    array[i] = Character.toUpperCase(array[i]);
-                } else if ((i % 2 != 0 && Character.isUpperCase(array[i])) || (i != 0 && Character.isUpperCase(array[i]))) {
-                    array[i] = Character.toLowerCase(array[i]);
+
+        String[] list = s.split(" ", -1);
+        String[] list2 = new String[list.length];
+
+        for (int i = 0; i < list.length; i++) {
+            list2[i] = "";
+            for (int j = 0; j < list[i].length(); j++) {
+                if (j % 2 == 0) {
+                    list2[i] += Character.toUpperCase(list[i].charAt(j));
+                } else {
+                    list2[i] += Character.toLowerCase(list[i].charAt(j));
                 }
-            }
-            words[index] = new String(array);
-        }
-        for(int i = 0; i<words.length; i++){
-            if (i < words.length-1){
-                answer += words[i] + " ";
             }
         }
 
-        answer += words[words.length-1];
+        for (int i = 0; i < list2.length; i++) {
+            if (i != list2.length - 1) {
+                answer += list2[i] + " ";
+            } else {
+                answer += list2[i];
+            }
+        }
         return answer;
     }
 }
 
-class asdf{
-    public static void main(String[] args) {
-        String s = "try hello  world ";
-        String answer = "";
-        StringBuilder string = new StringBuilder();
-
-        for (char c : s.toCharArray()) {
-            if (c == ' ') {
-                string.append(c);
-            }
-            String[] words = s.split(" ");
-            for (String word : words) {
-                char[] array = word.toCharArray();
-
-                for (int i = 0; i < array.length; i++) {
-                    if ((i % 2 == 0 && Character.isLowerCase(array[i])) || (i == 0 && Character.isLowerCase(array[i]))) {
-                        array[i] = Character.toUpperCase(array[i]);
-                    } else if ((i % 2 != 0 && Character.isUpperCase(array[i])) || (i != 0 && Character.isUpperCase(array[i]))) {
-                        array[i] = Character.toLowerCase(array[i]);
-                    }
-                }
-                string.append(array);
-            }
-        }
-    }
-}

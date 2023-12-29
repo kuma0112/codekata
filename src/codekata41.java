@@ -1,7 +1,6 @@
 public class codekata41 {
     public String solution(String s) {
         String answer = "";
-
         String[] list = s.split(" ", -1);
         String[] list2 = new String[list.length];
 

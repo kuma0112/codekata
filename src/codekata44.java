@@ -1,5 +1,3 @@
-package codekata1_40;
-
 public class codekata44 {
     public int solution(int[][] sizes) {
         int maxWidth = 0;

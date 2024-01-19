@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class codekata51 {
     public String solution(int[] food) {
 
@@ -12,19 +16,57 @@ public class codekata51 {
 
         수웅이가 준비한 음식의 양을 칼로리가 적은 순서대로 나타내는 정수 배열 food가 주어졌을 때,
         대회를 위한 음식의 배치를 나타내는 문자열을 return 하는 solution 함수를 완성해주세요.
-
-        3 / 2 = 1 ... 1 (나머지는 사용하지 못하는 음식의 개수 0 아니면 1)
-        4 / 2 = 2
-        6 / 2 = 3
-        수의 숫자만큼 적기 -> 가운데는 0 -> 거꾸로
         */
 
         String answer = "";
 
+        Arrays.sort(food);
         // 1. 준비한 음식의 개수를 담은 배열을 돌며 2로 나눈 몫을 구한다.
+        List<Integer> array = new ArrayList<>();
+        for (int a : food){
+            for (int i = 0; i < a/2 ; i++){
+                array.add(a/2);
+            }
+        }
         // 2. 몫만큼 숫자를 적는 String 배열을 만든다.
+        StringBuilder str = new StringBuilder();
+        for (int value : array) {
+            str.append(value);
+        }
+
         // 3. 해당 배열에 0을 더한다.
+        StringBuilder str2 = new StringBuilder();
+        for (int i = str.length() - 1; i >= 0; i--){
+            str2.append(str.charAt(i));
+        }
         // 4. (0넣기 전에 할 것)String 배열을 거꾸로 넣은 다른 String 배열을 만든 후, 3과 4를 합친다.
+        answer += str.toString() + "0" + str2.toString();
         return answer;
+    }
+
+    public static void main(String[] args) {
+        int[] food = {1,7,1,2};
+        String answer = "";
+
+        Arrays.sort(food);
+        List<Integer> array = new ArrayList<>();
+        for (int a : food){
+            for (int i = 0; i < a/2 ; i++){
+                array.add(a/2);
+            }
+        }
+        System.out.println("array = " + array);
+        
+        StringBuilder str = new StringBuilder();
+        for (int value : array) {
+            str.append(value);
+        }
+
+        StringBuilder str2 = new StringBuilder();
+        for (int i = str.length() - 1; i >= 0; i--){
+            str2.append(str.charAt(i));
+        }
+        System.out.println(str2.toString());
+
     }
 }

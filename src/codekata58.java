@@ -1,29 +1,33 @@
 public class codekata58 {
     public int solution(int[] nums) {
-        int answer = -1;
+        // 1. 0~3000 개수만큼의 크기를 가진 배열
+        boolean[] isPrime = new boolean[3001];
+        // 2. 2부터 3000까지 true로 초기화
+        for (int i = 2; i <= 3000; i++) {
+            isPrime[i] = true;
+        }
 
-        for (int i = 0; i < nums.length - 2; i++) {
-            for (int j = i + 1; j < nums.length - 1; j++) {
-                for (int k = j + 1; k < nums.length; k++) {
-                    // 2. 각 조합의 합 구하기
-                    int sum = nums[i] + nums[j] + nums[k];
-                    // 3. 합이 소수인지 판별
-                    if (sum < 2) {
-                    }
-                    for (int l = 2; i * i <= sum; i++){
-                        if (sum % i == 0){
-                    }
-                    answer ++;
+        // 3. 2부터 3000까지 소수만 골라 arr에 넣는다
+        for (int i = 2; i * i <= 3000; i++) {
+            if (isPrime[i]) {
+                for (int j = i * i; j <= 3000; j += i) {
+                    isPrime[j] = false;
                 }
             }
         }
 
-        return answer;
+        // 3. 세 자리 합하여 소수인 경우 숫자 세기
+        int count = 0;
+        int size = nums.length;
+        for (int i = 0; i < size - 2; i++) {
+            for (int j = i + 1; j < size - 1; j++) {
+                for (int k = j + 1; k < size; k++) {
+                    if (isPrime[nums[i] + nums[j] + nums[k]]) count++;
+                }
+            }
+        }
 
-        // [실행] 버튼을 누르면 출력 값을 볼 수 있습니다.
-        System.out.println("Hello Java");
-
-        return answer;
+        return count;
     }
 }
 

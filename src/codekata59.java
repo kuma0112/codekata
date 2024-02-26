@@ -1,6 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class codekata59 {
@@ -15,37 +13,24 @@ public class codekata59 {
      * 롤러로 페인트칠 하는 횟수 최소화 필요
      * 정수n, 정수m, 다시 칠해야 하는 구역이 담긴 배열 section(1~n 중 몇 개)
      * 페인트칠 최소 횟수는?
+     *
+     *  주어진 구간(section)에 대해 특정 길이(m)만큼의 구간을 최소한으로 칠해서 전체 범위(n)를 커버하는 문제
      */
         int answer = 0;
 
-        // 1. section 오름차순 정렬
-        Arrays.sort(section);
+        // 1. int section 배열을 arrayList로 바꿈
+        List<Integer> sections = new ArrayList<>();
+        for (int i : section) sections.add(i);
 
-        // 2. 연속된 구역을 저장할 arrayList를 만든다.
-        List<int[]> arr = new ArrayList<>();
-        // 현재 연속된 구역의 시작점
-        int startSection = section[0];
-        // 현재 연속된 구역의 끝점
-        int endSection = startSection;
-
-        // 정렬된 구역 배열을 순회
-        for (int i = 1; i < section.length; i++) {
-            // 현재 구역
-            int currentSection = section[i];
-            // 이전 구역과 현재 구역의 차이가 1이면, 연속된 구역임
-            if (currentSection == endSection + 1) {
-                endSection = currentSection;
-            } else {
-                // 연속이 끊기면 현재까지의 연속된 구역을 저장
-                arr.add(new int[]{startSection, endSection});
-                // 새로운 연속된 구역의 시작점을 현재 구역으로 설정
-                startSection = currentSection;
-                endSection = currentSection;
+        // 2. section이 빌 때까지
+        while(!sections.isEmpty()) {
+            int s = sections.get(0);
+            // 문제 조건에 맞게 칠하기
+            for (Integer i = s; i < s + m && i <= n; i++) {
+                sections.remove(i); // 칠한 영역 제거. i가 s+m이면서 <=n 될 때까지의 i들이 제거되면서 sections.get(0)값도 바뀜
             }
+            answer++; // 칠한 횟수 증가
         }
-        // 마지막 연속된 구역 추가
-        arr.add(new int[]{startSection, endSection});
-
 
         return answer;
     }

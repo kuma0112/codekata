@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class codekata60 {
 
     /**
@@ -11,12 +14,27 @@ public class codekata60 {
 
     public int solution(int number, int limit, int power) {
         int answer = 0;
+        List<Integer> arrayList = new ArrayList<>();
         // 1. 1~number 까지 각 숫자의 약수 개수를 구한다. 이후 arrayList에 저장.
+        for (int i = 1; i <= number; i++){
+            int count = 0;
+            for (int j = 1; j <= i; j++){
+                if (i % j == 0){
+                    count ++;
+                }
+            }
+            // 2. 약수 개수가 limit을 넘으면 power로 조정.
+            if (count > limit) {
+                arrayList.add(power);
+            } else {
+                arrayList.add(count);
+            }
 
-        // 2. 약수 개수가 limit을 넘으면 power로 조정.
-
+        }
         // 3. 조정된 arrayList의 모든 값을 모두 더한다.
+        for (int i : arrayList) {
+            answer += i;
+        }
         return answer;
     }
-
 }

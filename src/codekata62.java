@@ -1,24 +1,21 @@
 public class codekata62 {
-    public int solution(String[] babbling) {
-        String[] validSounds = {"aya", "ye", "woo", "ma"};
-        int count = 0;
-
-        for (String word : babbling) {
-            String tempWord = word;
-            for (String sound : validSounds) {
-                tempWord = tempWord.replaceAll(sound + sound, " "); // 연속된 발음 제거
+    public int solution(String[] babblings) {
+        // "aya", "ye", "woo", "ma" 4가지 발음만 가능
+        int answer = 0;
+        for(int i = 0; i < babblings.length; i++) {
+            if(babblings[i].contains("ayaaya") || babblings[i].contains("yeye") || babblings[i].contains("woowoo") || babblings[i].contains("mama")) {
+                continue;
             }
 
-            String checkWord = tempWord;
-            for (String sound : validSounds) {
-                checkWord = checkWord.replaceAll(sound, ""); // 발음 제거
-            }
+            babblings[i] = babblings[i].replace("aya", " ");
+            babblings[i] = babblings[i].replace("ye", " ");
+            babblings[i] = babblings[i].replace("woo", " ");
+            babblings[i] = babblings[i].replace("ma", " ");
+            babblings[i] = babblings[i].replace(" ", "");
 
-            if (checkWord.length() == 0 && !tempWord.contains(" ")) { // 남은 문자열 검사 및 연속된 발음 체크
-                count++;
-            }
+            if(babblings[i].length()  == 0) answer++;
+
         }
-
-        return count;
+        return answer;
     }
 }
